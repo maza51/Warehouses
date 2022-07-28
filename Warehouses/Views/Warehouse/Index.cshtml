@@ -1,0 +1,84 @@
+﻿@using Warehouses.Entities;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Warehouse
+@{
+    Layout = "_Layout";
+}
+
+<div>
+    <h2 class="m-2">@Model.Name</h2>
+    <table class="table table-dark">
+        <tbody>
+            @{
+                var products = Model.Products;
+
+                int i = 1;
+                foreach (var product in products)
+                {
+                    if (i > 5)
+                    {
+                        return;
+                    }
+
+                    <tr>
+                        <td>@product.Name</td>
+                        <td id="@product.Id">[@product.Count]</td>
+                        <td>
+                            <a asp-controller="warehouse" asp-action="add" asp-route-id="@product.Id">Увеличить</a>
+                            /
+                            <a asp-controller="warehouse" asp-action="subtract" asp-route-id="@product.Id">Уменьшить</a>
+                        </td>
+
+                        <td>
+                            <a href="#" onclick="Add(@product.Id)">Увеличить (api)</a>
+                            /
+                            <a href="#" onclick="Subtract(@product.Id)">Уменьшить (api)</a>
+                        </td>
+                    </tr>
+
+                    i++;
+                }
+            }
+        </tbody>
+    </table>
+    <div>
+        <a asp-controller="warehouse" asp-action="index" asp-route-id="1">Склад 1</a>
+        /
+        <a asp-controller="warehouse" asp-action="index" asp-route-id="2">Склад 2</a>
+    </div>
+</div>
+
+
+<script>
+    function Add(id) {
+        var countElement = document.getElementById(id);
+
+        fetch("https://" + document.location.host + '/api/product/addcount', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(id)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            countElement.textContent = "[" + data + "]";
+        });
+    }
+
+    function Subtract(id) {
+        var countElement = document.getElementById(id);
+
+        fetch("https://" + document.location.host + '/api/product/subtractcount', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(id)
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            countElement.textContent = "[" + data + "]";
+        });
+    }
+</script>
