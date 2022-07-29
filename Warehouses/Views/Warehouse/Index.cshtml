@@ -20,21 +20,21 @@
                         return;
                     }
 
-                    <tr>
-                        <td>@product.Name</td>
-                        <td id="@product.Id">[@product.Count]</td>
-                        <td>
-                            <a asp-controller="warehouse" asp-action="add" asp-route-id="@product.Id">Увеличить</a>
-                            /
-                            <a asp-controller="warehouse" asp-action="subtract" asp-route-id="@product.Id">Уменьшить</a>
-                        </td>
+                        <tr>
+                            <td>@product.Name</td>
+                            <td id="@product.Id">@product.Count</td>
+                            <td>
+                                <a asp-controller="warehouse" asp-action="add" asp-route-id="@product.Id">Увеличить</a>
+                                /
+                                <a asp-controller="warehouse" asp-action="subtract" asp-route-id="@product.Id">Уменьшить</a>
+                            </td>
 
-                        <td>
-                            <a href="#" onclick="Add(@product.Id)">Увеличить (api)</a>
-                            /
-                            <a href="#" onclick="Subtract(@product.Id)">Уменьшить (api)</a>
-                        </td>
-                    </tr>
+                            <td>
+                                <a href="#" onclick="EditCount(@product.Id, true)">Увеличить (api)</a>
+                                /
+                                <a href="#" onclick="EditCount(@product.Id, false)">Уменьшить (api)</a>
+                            </td>
+                        </tr>
 
                     i++;
                 }
@@ -50,35 +50,33 @@
 
 
 <script>
-    function Add(id) {
+    function EditCount(id, add) {
         var countElement = document.getElementById(id);
 
-        fetch("https://" + document.location.host + '/api/product/addcount', {
-            method: "POST",
+        var n = -1;
+
+        if (add) {
+            n = 1;
+        }
+
+        let product = {
+            count: Number(countElement.textContent) + n
+        }
+
+        if (product.count < 0) {
+            return;
+        }
+
+        fetch("https://" + document.location.host + '/api/product/' + id, {
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(id)
+            body: JSON.stringify(product)
         })
         .then((response) => response.json())
         .then((data) => {
-            countElement.textContent = "[" + data + "]";
-        });
-    }
-
-    function Subtract(id) {
-        var countElement = document.getElementById(id);
-
-        fetch("https://" + document.location.host + '/api/product/subtractcount', {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(id)
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            countElement.textContent = "[" + data + "]";
+            countElement.textContent = product.count;
         });
     }
 </script>

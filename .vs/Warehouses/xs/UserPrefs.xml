@@ -1,19 +1,19 @@
 ﻿<Properties StartupConfiguration="{59846780-F2C9-4C73-B448-96D68011112F}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Warehouses/Startup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Warehouses/Controllers/Api/ProductControllers.cs">
     <Files>
       <File FileName="Warehouses/Entities/WareHouse.cs" Line="16" Column="1" />
       <File FileName="Warehouses/Entities/Product.cs" Line="16" Column="1" />
       <File FileName="Warehouses/Entities/WareHouseMan.cs" Line="6" Column="3" />
       <File FileName="Warehouses/Services/WareHouseService.cs" Line="41" Column="1" />
-      <File FileName="Warehouses/Services/ProductService.cs" Line="45" Column="1" />
+      <File FileName="Warehouses/Services/ProductService.cs" Line="53" Column="37" />
       <File FileName="Warehouses/Services/IProductService.cs" Line="13" Column="2" />
       <File FileName="Warehouses/Services/IWareHouseService.cs" Line="11" Column="2" />
       <File FileName="Warehouses/Startup.cs" Line="27" Column="6" />
       <File FileName="Warehouses/Controllers/WarehouseController.cs" Line="25" Column="7" />
-      <File FileName="Warehouses/Views/Warehouse/Index.cshtml" Line="67" Column="6" />
+      <File FileName="Warehouses/Views/Warehouse/Index.cshtml" Line="30" Column="34" />
       <File FileName="Warehouses/Models/ProductModels.cs" Line="10" Column="1" />
-      <File FileName="Warehouses/Controllers/Api/ProductControllers.cs" Line="27" Column="6" />
+      <File FileName="Warehouses/Controllers/Api/ProductControllers.cs" Line="32" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -21,10 +21,16 @@
           <Node name="Warehouses" expanded="True">
             <Node name="Warehouses" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="Api" expanded="True" />
+                <Node name="Api" expanded="True">
+                  <Node name="ProductControllers.cs" selected="True" />
+                </Node>
               </Node>
               <Node name="Entities" expanded="True" />
               <Node name="Models" expanded="True" />
+              <Node name="Services" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Warehouse" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

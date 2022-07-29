@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Warehouses.Entities;
 using Warehouses.Models;
 using Warehouses.Services;
 
@@ -15,35 +16,19 @@ namespace Warehouses.Controllers.Api
             _productService = productService;
         }
 
-        [HttpPost("addcount")]
-        public int Add([FromBody] int id)
+        [HttpPut("{id:int}")]
+        public Product Edit([FromBody] Product product, int id)
         {
-            var product = _productService.GetById(id);
+            var productInDb = _productService.GetById(id);
 
-            if (product != null)
+            if (productInDb != null)
             {
-                product.Count++;
+                productInDb.Count = product.Count;
 
-                return product.Count;
-
+                return productInDb;
             }
 
-            return 0;
-        }
-
-        [HttpPost("subtractcount")]
-        public int Subtract([FromBody] int id)
-        {
-            var product = _productService.GetById(id);
-
-            if (product != null && product.Count > 0)
-            {
-                product.Count--;
-
-                return product.Count;
-            }
-
-            return 0;
+            return new Product();
         }
     }
 }
