@@ -13,7 +13,7 @@
       <File FileName="Warehouses/Controllers/WarehouseController.cs" Line="25" Column="7" />
       <File FileName="Warehouses/Views/Warehouse/Index.cshtml" Line="30" Column="34" />
       <File FileName="Warehouses/Models/ProductModels.cs" Line="10" Column="1" />
-      <File FileName="Warehouses/Controllers/Api/ProductControllers.cs" Line="32" Column="10" />
+      <File FileName="Warehouses/Controllers/Api/ProductControllers.cs" Line="31" Column="33" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

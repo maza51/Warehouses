@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Warehouses.Entities;
 
 namespace Warehouses.Services
 {
     public interface IProductService
     {
-        List<Product> GetAll();
-        Product GetById(int id);
-        List<Product> GetByWareHouseId(int id);
-        void AddCount(int id);
+        Task<List<Product>> GetAllAsync();
+        Task<Product> GetByIdAsync(int id);
+        Task<List<Product>> GetByWareHouseIdAsync(int id);
+        Task UpdateAsync(Product product);
     }
 }

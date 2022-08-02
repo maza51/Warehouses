@@ -5,18 +5,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Warehouses.Data;
 using Warehouses.Services;
 
 namespace Warehouses
 {
     public class Startup
     {
+        private IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IProductService, ProductService>();
-            services.AddSingleton<IWarehouseService, WarehouseService>();
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(_configuration.GetConnectionString("AppDbContext")));
+
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IWarehouseService, WarehouseService>();
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Warehouses.Services;
 
@@ -17,14 +18,14 @@ namespace Warehouses.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(int? id)
+        public async Task<IActionResult> Index(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var warehouse = _warehouseService.GetById((int)id);
+            var warehouse = await _warehouseService.GetByIdAsync((int)id);
 
             if (warehouse == null)
             {
@@ -32,32 +33,6 @@ namespace Warehouses.Controllers
             }
 
             return View(warehouse);
-        }
-
-        [HttpGet]
-        public IActionResult Add(int id)
-        {
-            var product = _productService.GetById(id);
-
-            if (product != null)
-            {
-                product.Count++;
-            }
-
-            return RedirectToAction("Index", new { id = product.WarehouseId });
-        }
-
-        [HttpGet]
-        public IActionResult Subtract(int id)
-        {
-            var product = _productService.GetById(id);
-
-            if (product != null && product.Count > 0)
-            {
-                product.Count--;
-            }
-
-            return RedirectToAction("Index", new { id = product.WarehouseId });
         }
     }
 }

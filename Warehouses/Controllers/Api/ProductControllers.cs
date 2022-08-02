@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Warehouses.Entities;
 using Warehouses.Models;
@@ -17,9 +18,9 @@ namespace Warehouses.Controllers.Api
         }
 
         [HttpPut("{id:int}")]
-        public Product Edit([FromBody] Product product, int id)
+        public async Task<Product> Edit([FromBody] Product product, int id)
         {
-            var productInDb = _productService.GetById(id);
+            var productInDb = await _productService.GetByIdAsync(id);
 
             if (productInDb != null)
             {

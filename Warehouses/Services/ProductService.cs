@@ -1,63 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Warehouses.Data;
 using Warehouses.Entities;
 
 namespace Warehouses.Services
 {
     public class ProductService : IProductService
     {
-        private List<Product> _products { get; set; }
+        private AppDbContext _dbContext;
 
-        public ProductService()
+        public ProductService(AppDbContext dbContext)
         {
-            _products = new List<Product>
-            {
-                new Product { Id = 1, Name = "Морковка", Count = 1, WarehouseId = 1 },
-
-                new Product { Id = 2, Name = "Картошка", Count = 1, WarehouseId = 1 },
-
-                new Product { Id = 3, Name = "Лук", Count = 1, WarehouseId = 1 },
-
-                new Product { Id = 4, Name = "Помидоры", Count = 1, WarehouseId = 1 },
-
-                new Product { Id = 5, Name = "Огурцы", Count = 1, WarehouseId = 1 },
-
-                new Product { Id = 6, Name = "Морковка", Count = 1, WarehouseId = 2 },
-
-                new Product { Id = 7, Name = "Картошка", Count = 1, WarehouseId = 2 },
-
-                new Product { Id = 8, Name = "Лук", Count = 1, WarehouseId = 2 },
-
-                new Product { Id = 9, Name = "Помидоры", Count = 1, WarehouseId = 2 },
-
-                new Product { Id = 10, Name = "Огурцы", Count = 1, WarehouseId = 2 },
-            };
+            _dbContext = dbContext;
         }
 
-        public List<Product> GetAll()
+        public async Task<List<Product>> GetAllAsync()
         {
-            return _products;
+            return await _dbContext.Products.ToListAsync();
         }
 
-        public Product GetById(int id)
+        public async Task<Product> GetByIdAsync(int id)
         {
-            return _products.FirstOrDefault(x => x.Id == id);
+            return await _dbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public List<Product> GetByWareHouseId(int id)
+        public async Task<List<Product>> GetByWareHouseIdAsync(int id)
         {
-            return _products.Where(x => x.WarehouseId == id).ToList();
+            return await _dbContext.Products.Where(x => x.WarehouseId == id).ToListAsync();
         }
 
-        public void AddCount(int id)
+        public async Task UpdateAsync(Product product)
         {
-            var product = this.GetById(id);
-
-            if (product != null)
-            {
-                product.Count++;
-            }
+            _dbContext.Products.Update(product);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

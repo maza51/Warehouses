@@ -1,47 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Warehouses.Data;
 using Warehouses.Entities;
 
 namespace Warehouses.Services
 {
     public class WarehouseService : IWarehouseService
     {
-        private IProductService _productService;
+        private AppDbContext _dbContext;
 
-        private List<Warehouse> _warehouses;
-
-        public WarehouseService(IProductService productService)
+        public WarehouseService(AppDbContext dbContext)
         {
-            _productService = productService;
-
-            _warehouses = new List<Warehouse>
-            {
-                new Warehouse
-                {
-                    Id = 1,
-                    Name = "Склад 1",
-                    Products = _productService.GetByWareHouseId(1)
-                },
-
-                new Warehouse
-                {
-                    Id = 2,
-                    Name = "Склад 2",
-                    Products = _productService.GetByWareHouseId(2)
-                }
-            };
-            _productService = productService;
+            _dbContext = dbContext;
         }
 
-        public List<Warehouse> GetAll()
+        public async Task<List<Warehouse>> GetAllAsync()
         {
-            return _warehouses;
+            return await _dbContext.Warehouses
+                .Include(x => x.Products)
+                .ToListAsync();
         }
 
-        public Warehouse GetById(int id)
+        public async Task<Warehouse> GetByIdAsync(int id)
         {
-            return _warehouses.FirstOrDefault(x => x.Id == id);
+            return await _dbContext.Warehouses
+                .Include(x => x.Products)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
     }
 }
