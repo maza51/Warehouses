@@ -14,8 +14,8 @@ namespace Warehouses.Data
         {
             using (var context = new AppDbContext(service.GetRequiredService<DbContextOptions<AppDbContext>>()))
             {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                //context.Database.EnsureDeleted();
+                //context.Database.EnsureCreated();
 
                 var products = new List<Product>
                 {
