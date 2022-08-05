@@ -1,0 +1,43 @@
+﻿@using Warehouses;
+@using Warehouses.Entities;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Http.Extensions;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Warehouse
+@{
+    Layout = "_Layout";
+}
+
+<div>
+    <h2 class="m-2">@Model.Name</h2>
+    <table class="table table-dark">
+        <tbody>
+            @{
+                var products = Model.Products;
+
+                foreach (var product in products)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td id="@product.Id">@product.Count</td>
+                        <td>
+                            <a asp-controller="product" asp-action="add" asp-route-id="@product.Id">Увеличить</a>
+                            /
+                            <a asp-controller="product" asp-action="subtract" asp-route-id="@product.Id">Уменьшить</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    @{
+        if (!Context.Session.Keys.Contains("warehouseMan"))
+        {
+            <p>Нет свободных кладовщиков</p>
+        }
+        else
+        {
+            <p>Вы кладовщик № @Context.Session.GetInt32("warehouseMan")</p>
+        }
+    }
+</div>

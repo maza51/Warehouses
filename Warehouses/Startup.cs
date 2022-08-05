@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Warehouses.Data;
 using Warehouses.Services;
 
@@ -30,11 +31,22 @@ namespace Warehouses
 
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IWarehouseService, WarehouseService>();
+            services.AddTransient<IWarehouseManService, WarehouseManService>();
+            services.AddTransient<IHistoryService, HistoryService>();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".Warehouses.session";
+                options.Cookie.IsEssential = true;
+                options.IdleTimeout = TimeSpan.FromSeconds(600);
+                
+            });
 
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IWarehouseManService warehouseManService)
         {
             if (env.IsDevelopment())
             {
@@ -44,15 +56,12 @@ namespace Warehouses
             app.UseRouting();
             app.UseStaticFiles();
 
-            app.UseMvc();
-            //app.UseMvcWithDefaultRoute();
+            app.UseSession();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Warehouse}/{action=Index}/{id=1}");
-            });
+            app.UseMiddleware<WarehouseManMiddleware>();
+
+            app.UseMvc();
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

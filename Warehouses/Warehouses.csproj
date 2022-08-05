@@ -16,6 +16,7 @@
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="WareHouses.db-shm" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />

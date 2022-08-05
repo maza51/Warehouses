@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Warehouses.Data;
@@ -32,10 +33,12 @@ namespace Warehouses.Services
             return await _dbContext.Products.Where(x => x.WarehouseId == id).ToListAsync();
         }
 
-        public async Task UpdateAsync(Product product)
+        public async Task<bool> UpdateAsync(Product product)
         {
             _dbContext.Products.Update(product);
-            await _dbContext.SaveChangesAsync();
+            var saved = await _dbContext.SaveChangesAsync();
+
+            return saved > 0;
         }
     }
 }

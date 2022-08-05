@@ -9,6 +9,6 @@ namespace Warehouses.Services
         Task<List<Product>> GetAllAsync();
         Task<Product> GetByIdAsync(int id);
         Task<List<Product>> GetByWareHouseIdAsync(int id);
-        Task UpdateAsync(Product product);
+        Task<bool> UpdateAsync(Product product);
     }
 }

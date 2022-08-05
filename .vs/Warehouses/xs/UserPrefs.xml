@@ -1,36 +1,50 @@
 ﻿<Properties StartupConfiguration="{59846780-F2C9-4C73-B448-96D68011112F}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Warehouses/Controllers/Api/ProductControllers.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Warehouses/Startup.cs">
     <Files>
-      <File FileName="Warehouses/Entities/WareHouse.cs" Line="16" Column="1" />
+      <File FileName="Warehouses/Entities/WareHouse.cs" Line="12" Column="35" />
       <File FileName="Warehouses/Entities/Product.cs" Line="16" Column="1" />
-      <File FileName="Warehouses/Entities/WareHouseMan.cs" Line="6" Column="3" />
-      <File FileName="Warehouses/Services/WareHouseService.cs" Line="41" Column="1" />
-      <File FileName="Warehouses/Services/ProductService.cs" Line="53" Column="37" />
-      <File FileName="Warehouses/Services/IProductService.cs" Line="13" Column="2" />
-      <File FileName="Warehouses/Services/IWareHouseService.cs" Line="11" Column="2" />
-      <File FileName="Warehouses/Startup.cs" Line="27" Column="6" />
-      <File FileName="Warehouses/Controllers/WarehouseController.cs" Line="25" Column="7" />
-      <File FileName="Warehouses/Views/Warehouse/Index.cshtml" Line="30" Column="34" />
+      <File FileName="Warehouses/Entities/WareHouseMan.cs" Line="6" Column="36" />
+      <File FileName="Warehouses/Services/WareHouseService.cs" Line="20" Column="57" />
+      <File FileName="Warehouses/Services/ProductService.cs" Line="35" Column="1" />
+      <File FileName="Warehouses/Startup.cs" Line="64" Column="13" />
+      <File FileName="Warehouses/Controllers/WarehouseController.cs" Line="13" Column="22" />
+      <File FileName="Warehouses/Views/Warehouse/Index.cshtml" Line="22" Column="47" />
       <File FileName="Warehouses/Models/ProductModels.cs" Line="10" Column="1" />
-      <File FileName="Warehouses/Controllers/Api/ProductControllers.cs" Line="31" Column="33" />
+      <File FileName="Warehouses/Data/AppDbContext.cs" Line="20" Column="1" />
+      <File FileName="Warehouses/appsettings.json" Line="12" Column="4" />
+      <File FileName="Warehouses/Data/SeedData.cs" Line="60" Column="56" />
+      <File FileName="Warehouses/Program.cs" Line="37" Column="1" />
+      <File FileName="Warehouses/Services/IProductService.cs" Line="14" Column="2" />
+      <File FileName="Warehouses/Services/IWarehouseService.cs" Line="1" Column="1" />
+      <File FileName="Warehouses/Views/Warehouse/Details.cshtml" Line="40" Column="72" />
+      <File FileName="Warehouses/Controllers/ProductController.cs" Line="58" Column="95" />
+      <File FileName="Warehouses/Views/Shared/_Layout.cshtml" Line="1" Column="1" />
+      <File FileName="Warehouses/Services/WarehouseManService.cs" Line="30" Column="56" />
+      <File FileName="Warehouses/Services/IWarehouseManService.cs" Line="12" Column="42" />
+      <File FileName="Warehouses/WarehouseManMiddleware.cs" Line="39" Column="6" />
+      <File FileName="Warehouses/Entities/HstorOfChanges.cs" Line="4" Column="21" />
+      <File FileName="Warehouses/Services/HistoryService.cs" Line="10" Column="27" />
+      <File FileName="Warehouses/Services/IHistoryService.cs" Line="1" Column="1" />
+      <File FileName="Warehouses/Controllers/Api/ProductController.cs" Line="30" Column="17" />
+      <File FileName="Warehouses/Controllers/Api/ApiWarehouseController.cs" Line="32" Column="57" />
+      <File FileName="Warehouses/Controllers/HomeController.cs" Line="15" Column="20" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Warehouses" expanded="True">
             <Node name="Warehouses" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="Api" expanded="True">
-                  <Node name="ProductControllers.cs" selected="True" />
-                </Node>
-              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
               <Node name="Entities" expanded="True" />
-              <Node name="Models" expanded="True" />
               <Node name="Services" expanded="True" />
               <Node name="Views" expanded="True">
+                <Node name="Shared" expanded="True" />
                 <Node name="Warehouse" expanded="True" />
               </Node>
+              <Node name="wwwroot" expanded="True" />
+              <Node name="WareHouses.db" selected="True" />
             </Node>
           </Node>
         </State>
@@ -40,10 +54,10 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
-  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
   <MonoDevelop.Ide.ItemProperties.Warehouses PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
 </Properties>

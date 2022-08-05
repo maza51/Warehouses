@@ -12,6 +12,8 @@ namespace Warehouses.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<WarehouseMan> WarehouseMans { get; set; }
+        public DbSet<History> Historyes { get; set; }
     }
 }
 

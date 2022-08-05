@@ -1,82 +1,36 @@
 ﻿@using Warehouses.Entities;
+@using System.Collections.Generic;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model Warehouse
+@model IEnumerable<Warehouse>
 @{
     Layout = "_Layout";
 }
 
 <div>
-    <h2 class="m-2">@Model.Name</h2>
-    <table class="table table-dark">
-        <tbody>
-            @{
-                var products = Model.Products;
+    <h1>@ViewData["test"]</h1>
 
-                int i = 1;
-                foreach (var product in products)
-                {
-                    if (i > 5)
-                    {
-                        return;
-                    }
+    <select class="form-select" onchange="OnChange();" id="select">
+        <option selected>Выбрать склад</option>
 
-                        <tr>
-                            <td>@product.Name</td>
-                            <td id="@product.Id">@product.Count</td>
-                            <td>
-                                <a asp-controller="warehouse" asp-action="add" asp-route-id="@product.Id">Увеличить</a>
-                                /
-                                <a asp-controller="warehouse" asp-action="subtract" asp-route-id="@product.Id">Уменьшить</a>
-                            </td>
-
-                            <td>
-                                <a href="#" onclick="EditCount(@product.Id, true)">Увеличить (api)</a>
-                                /
-                                <a href="#" onclick="EditCount(@product.Id, false)">Уменьшить (api)</a>
-                            </td>
-                        </tr>
-
-                    i++;
-                }
-            }
-        </tbody>
-    </table>
-    <div>
-        <a asp-controller="warehouse" asp-action="index" asp-route-id="1">Склад 1</a>
-        /
-        <a asp-controller="warehouse" asp-action="index" asp-route-id="2">Склад 2</a>
-    </div>
-</div>
-
-
-<script>
-    function EditCount(id, add) {
-        var countElement = document.getElementById(id);
-
-        var n = -1;
-
-        if (add) {
-            n = 1;
+        @foreach (var item in Model)
+        {
+            <option value="@item.Id">@item.Name</option>
         }
+    </select>
 
-        let product = {
-            count: Number(countElement.textContent) + n
-        }
+    @{
+        var warehouse = Model.FirstOrDefault();
 
-        if (product.count < 0) {
+        if (warehouse == null)
+        {
             return;
         }
-
-        fetch("https://" + document.location.host + '/api/product/' + id, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(product)
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            countElement.textContent = product.count;
-        });
     }
+</div>
+
+<script>
+    function OnChange() {
+        location.href = "/" + document.getElementById("select").;
+    }
+
 </script>

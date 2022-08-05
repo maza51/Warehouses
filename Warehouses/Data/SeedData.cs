@@ -59,6 +59,29 @@ namespace Warehouses.Data
 
                 context.Warehouses.AddRange(warehouses);
 
+                var warehouseMans = new List<WarehouseMan>
+                {
+                    new WarehouseMan
+                    {
+                        Id = 1,
+                        LastTimeBusy = DateTime.Now.AddMinutes(-10)
+                    },
+
+                    new WarehouseMan
+                    {
+                        Id = 2,
+                        LastTimeBusy = DateTime.Now.AddMinutes(-10)
+                    },
+
+                    new WarehouseMan
+                    {
+                        Id = 3,
+                        LastTimeBusy = DateTime.Now.AddMinutes(-10)
+                    }
+                };
+
+                context.WarehouseMans.AddRange(warehouseMans);
+
                 context.SaveChanges();
             }
 
